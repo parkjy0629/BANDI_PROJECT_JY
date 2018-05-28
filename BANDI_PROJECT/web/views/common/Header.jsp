@@ -72,7 +72,7 @@
 				 	</button>
 			 <%}%>
 			 
-			 <form action ="/BANDI/Cart.do" method ="POST" onsubmit="return loginCheck(this);" name ="cartSubmit">
+			 <form action ="/BANDI/cart.ct" method ="POST" onsubmit="return loginCheck(this);" name ="cartSubmit">
 			 	<button class="button w3-right">
 			 		<img src="<%=request.getContextPath()%>/resources/images/common/cart.jpg" style ="width:60px; height:auto;">
 			 		<div class="button__horizontal"></div>

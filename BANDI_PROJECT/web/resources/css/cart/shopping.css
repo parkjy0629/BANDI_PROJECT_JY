@@ -1,0 +1,114 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+.btn1 {
+    width : 100px;
+    height : 27px;
+    border-radius : 5px;
+    border : 0;
+    color : white;
+    background-color : rgb(163, 87, 118);
+}
+
+.btn2 {
+    width : 60px;
+    height : 27px;
+    border-radius : 5px;
+    border : 0;
+}
+
+.btn3 {
+    width : 170px;
+    height : 50px;
+    border-radius : 5px;
+    border : 0;
+}
+
+.btn4 {
+    width : 170px;
+    height : 50px;
+    border-radius : 5px;
+    border : 0;
+    color : white;
+    background-color : rgb(163, 87, 118);
+}
+
+.btn5 {
+    width : 170px;
+    height : 50px;
+    border-radius : 5px;
+    border : 0;
+    color : white;
+    background-color : rgb(95, 75, 139);
+}
+
+.btn6 {
+    width : 120px;
+    height : 27px;
+    border-radius : 5px;
+    border : 0;
+    color : white;
+    background-color : rgb(132, 141, 197);
+}
+
+.btn7 {
+    width : 120px;
+    height : 27px;
+    font-size : 9pt;
+    border-radius : 5px;
+    border : 0;
+    color : white;
+    background-color : rgb(95, 75, 139);
+}
+
+.btn8 {
+    width : 70px;
+    height : 25px;
+    text-align : center;
+    font-size : 10pt;
+    border-radius : 5px;
+    border : 0;
+}
+
+#tdChk {
+	width : 3%;
+}
+
+#tdBook {
+	width : 38%;
+	padding-left : 3%;
+}
+
+.tdPrice {
+	width : 13%;
+}
+
+#tdQuan {
+	width : 10%;
+}
+
+#tdBtn {
+	width : 23%;
+}
+
+#quan {
+	width : 70px;
+}
+
+#total {
+	width : 30%;
+}
+
+#delivery {
+	width : 20%;
+}
+
+#orderPrice {
+	width : 30%;
+}
+
+#point {
+	width : 20%;
+}
