@@ -1,0 +1,355 @@
+  
+  .searchbar{
+    padding-top: 7px; padding-bottom: 2px; width:50%;
+    border-bottom: 2px solid #A35776;
+    border-right: 0 !important;
+    border-left: 0 !important;
+    border-top: 0 !important;
+    outline: 0;
+    margin-right: -10px;
+  }
+ 
+  #searchBy{
+    color:snow;
+    background: #5F4B8B;
+    padding-top: 10px; padding-bottom: 8px; 
+    outline: 0;
+    border-radius: 15%;
+    margin-right: -8px;
+  }
+
+
+  /* DROP DOWN MENU - PYS */
+  .header-container {
+    display: block;
+    cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: snow;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.header-container:hover .bar1{
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);  
+}
+
+.header-container:hover .bar2{
+     opacity: 0;  
+     
+}
+
+.header-container:hover .bar3{
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);  
+  
+}
+
+.parent:hover .bar3{
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);  
+  
+}
+
+.parent:hover .bar1{
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);  
+}
+
+.parent:hover .bar2{
+    opacity: 0; 
+}
+
+.parent {
+  display: block;
+  position: relative;
+  float: left;
+  line-height: 30px;
+  background-color: #5F4B8B;
+  z-index: 2;
+  
+  }
+
+.parent a
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.parent:hover > ul 
+{
+  display:block;
+  position:absolute;
+}
+
+.child 
+{
+  display: none;
+}
+
+.child li 
+{
+  background-color: #5F4B8B;
+  line-height: 30px;
+  padding:10px;
+  /* border-bottom:#CCC 1px solid; */
+  /* border-right:#CCC 1px solid;  */
+  /* border: #A35776 1px solid; */
+  width:100%;
+}
+
+.child li a
+{
+  display:block;
+  color: snow;
+}
+
+a{
+  font-size: 1.2em;
+}
+
+ul
+{
+  list-style: none;margin: 0;
+  padding: 0px; 
+  min-width:15em;
+  max-width:17em;
+}
+
+ul ul ul
+{
+  left: 100%;
+  top: 0;
+  margin-left:1px;
+}
+
+.parent li:hover 
+{
+  background-color: #A35776;
+}
+
+/* CART */
+.button {
+  --offset: 10px;
+  --border-size: 2px;
+  display: block;
+  position: relative;
+  /* padding: 1.0em 2em; */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+          margin-left: 40px;
+  border: 0;
+  background: transparent;
+  color: #A35776;
+  text-transform: uppercase;
+  letter-spacing: .25em;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 var(--border-size) currentcolor;
+  transition: background .8s ease;
+}
+.button:hover {
+  background: rgba(100, 0, 0, 0.03);
+}
+.button__horizontal, .button__vertical {
+  position: absolute;
+  top: var(--horizontal-offset, 0);
+  right: var(--vertical-offset, 0);
+  bottom: var(--horizontal-offset, 0);
+  left: var(--vertical-offset, 0);
+  transition: -webkit-transform .8s ease;
+  transition: transform .8s ease;
+  transition: transform .8s ease, -webkit-transform .8s ease;
+  will-change: transform;
+}
+.button__horizontal::before, .button__vertical::before {
+  content: '';
+  position: absolute;
+  border: inherit;
+}
+.button__horizontal {
+  --vertical-offset: calc(var(--offset) * -1);
+  border-top: var(--border-size) solid currentcolor;
+  border-bottom: var(--border-size) solid currentcolor;
+}
+.button__horizontal::before {
+  top: calc(var(--vertical-offset) - var(--border-size));
+  bottom: calc(var(--vertical-offset) - var(--border-size));
+  left: calc(var(--vertical-offset) * -1);
+  right: calc(var(--vertical-offset) * -1);
+}
+.button:hover .button__horizontal {
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+}
+.button__vertical {
+  --horizontal-offset: calc(var(--offset) * -1);
+  border-left: var(--border-size) solid currentcolor;
+  border-right: var(--border-size) solid currentcolor;
+}
+.button__vertical::before {
+  top: calc(var(--horizontal-offset) * -1);
+  bottom: calc(var(--horizontal-offset) * -1);
+  left: calc(var(--horizontal-offset) - var(--border-size));
+  right: calc(var(--horizontal-offset) - var(--border-size));
+}
+.button:hover .button__vertical {
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+}
+
+/* LOGIN AND OTHER TEXT  -PYS */
+
+.button1 {
+  position: relative;
+  /* padding: 1em 1.5em; */
+  padding-top:15px;
+  padding-bottom:15px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  font-size: 1.5em;
+  /* margin: 1em 0.8em; */
+  margin-right: 15px;
+}
+
+.button1.type3 {
+  color: black;
+}
+.button1.type3.type3::after, .button1.type3.type3::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  border: 2px solid;
+  transition: all 0.6s ease;
+  border-radius: 2px;
+}
+.button1.type3.type3::after {
+  bottom: 0;
+  right: 0;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-bottom:3px solid #5F4B8B;
+  border-right:3px solid #5F4B8B;
+}
+.button1.type3.type3::before {
+  top: 0;
+  left: 0;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  /* border-top-color: #435a6b; */
+  /* border-left-color: #435a6b; */
+
+  border-top:3px solid #5F4B8B;
+  border-left:3px solid #5F4B8B;
+}
+.button1.type3.type3:hover:after, .button1.type3.type3:hover:before {
+  border-bottom-color: #A35776;
+  border-right-color: #A35776;
+  border-top-color: #A35776;
+  border-left-color: #A35776;
+  width: 100%;
+  height: 100%;
+}
+
+/* Bubble Button */
+
+.bubbly-button {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  display: inline-block;
+  font-size: 1.4em;
+  /* padding: 1em 2em; */
+  padding-left: 10px;
+  padding-right:10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #5F4B8B;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 1px 15px palevioletred;
+}
+.bubbly-button:focus {
+  outline: 0;
+}
+.bubbly-button:before, .bubbly-button:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 140%;
+  height: 100%;
+  left: -20%;
+  z-index: -1000;
+  transition: all ease-in-out 0.5s;
+  background-repeat: no-repeat;
+}
+.bubbly-button:before {
+  display: none;
+  top: -75%;
+  background-image: radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, transparent 20%, #5F4B8B 20%, transparent 30%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, transparent 10%, #5F4B8B 15%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.bubbly-button:after {
+  display: none;
+  bottom: -75%;
+  background-image: radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, #5F4B8B 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.bubbly-button:active {
+  transform: scale(0.9);
+  background-color: #A35776;
+  box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+}
+.bubbly-button.animate:before {
+  display: block;
+  animation: topBubbles ease-in-out 0.75s forwards;
+}
+.bubbly-button.animate:after {
+  display: block;
+  animation: bottomBubbles ease-in-out 0.75s forwards;
+}
+
+@keyframes topBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+  }
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+  }
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
+@keyframes bottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+  }
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+  }
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+    background-size: 0% 0%, 0% 0%,  0% 0%,  0% 0%,  0% 0%,  0% 0%;
+  }
+}
