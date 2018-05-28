@@ -1,0 +1,26 @@
+#back{
+    border: 1px solid black;
+}
+.w3-sidebar a {
+    font-family: "Roboto", sans-serif
+    
+}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {
+    font-family: "Montserrat", sans-serif;
+}
+.carousel-caption {
+    right: 20%;
+    text-align: right;
+    max-width: 300px;
+    left: auto;
+    padding:5px;
+    color: gray;
+}
+#gall{
+    background-color: dodgerblue;
+    color: white;
+    
+}
+#mySidebar{
+    position: none;
+}
