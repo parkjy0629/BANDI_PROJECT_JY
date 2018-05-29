@@ -70,6 +70,12 @@
                     </tbody>
                 </table>
             </div>
+            
+            <!-- 삭제 버튼 -->
+            <div class="row">
+            	<input type="button" class="btn9" id="selctDelBtn" value="선택 삭제">&nbsp;&nbsp;&nbsp;
+                <input type="button" class="btn10" id="AllDelBtn" value="전체 삭제">
+            </div>
 
             <!-- 금액 테이블 -->
             <div class="row" style="padding-top:5%;">
