@@ -37,7 +37,7 @@ public class ShppingCartServlet extends HttpServlet {
 			
 		} else {
 			
-			cService.selectBasket();
+			cService.selectBasket(user.getmUser_UID());
 			page = "views/cart/shoppingCart.jsp";
 			
 		}
