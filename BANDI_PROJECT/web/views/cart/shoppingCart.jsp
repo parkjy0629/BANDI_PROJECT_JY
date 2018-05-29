@@ -74,7 +74,7 @@
             <!-- 삭제 버튼 -->
             <div class="row">
             	<input type="button" class="btn9" id="selctDelBtn" value="선택 삭제">&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn10" id="AllDelBtn" value="전체 삭제">
+                <input type="button" class="btn1" id="AllDelBtn" value="전체 삭제">
             </div>
 
             <!-- 금액 테이블 -->
