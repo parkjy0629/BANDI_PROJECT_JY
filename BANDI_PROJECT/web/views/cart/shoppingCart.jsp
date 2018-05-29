@@ -44,28 +44,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="tdChk"><input type="checkbox" name="chk" id="chk1"><input type="hidden" value="10000123"></td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
+                            <td id="tdChk"><input type="checkbox" class="chk" id="chk1"><input type="hidden" value="10000123"></td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
                             <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample2.PNG" alt="퍼즈" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">퍼즈</span></td>
                             <td class="tdPrice" name="sale" id="sale1">15,500 원</td>
-                            <td id="tdQuan"><input type="number" name="quan" id="quan" min="0" value="1"></td>
+                            <td id="tdQuan"><input type="number" class="quan" min="0" value="1"></td>
                             <td class="tdPrice" name="quan" id="quan1">15,500 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1" name="pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2" name="delBtn" value="삭제"></td>
+                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
                         </tr>
                         <tr>
-                        	<td id="tdChk"><input type="checkbox" name="chk" id="chk2"><input type="hidden" value="20000123"></td>
+                        	<td id="tdChk"><input type="checkbox" class="chk" id="chk2"><input type="hidden" value="20000123"></td>
                             <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample1.PNG" alt="신경끄기의기술" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">신경끄기의기술</span></td>
                             <td class="tdPrice" name="sale" id="sale2">21,000 원</td>
-                            <td id="tdQuan"><input type="number" name="quan" id="quan" min="0" value="1"></td>
+                            <td id="tdQuan"><input type="number" class="quan" min="0" value="1"></td>
                             <td class="tdPrice" name="quan" id="quan2">21,000 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1" name="pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2" name="delBtn" value="삭제"></td>
+                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
                         </tr>
                         <tr>
-                        	<td id="tdChk"><input type="checkbox" name="chk" id="chk3"><input type="hidden" value="30000123"></td>
+                        	<td id="tdChk"><input type="checkbox" class="chk" id="chk3"><input type="hidden" value="30000123"></td>
                             <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample3.PNG" alt="미움받을용기" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">미움받을용기</span></td>
                             <td class="tdPrice" name="sale" id="sale3">17,000 원</td>
-                            <td id="tdQuan"><input type="number" name="quan" id="quan" min="0" value="2"></td>
+                            <td id="tdQuan"><input type="number" class="quan" min="0" value="2"></td>
                             <td class="tdPrice" name="quan" id="quan3">34,000 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1" name="pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2" name="delBtn" value="삭제"></td>
+                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -109,11 +109,11 @@
             <script>
             	var bookList = [];
             	
-	            $('input[name=delBtn]').on('click',function(){
+	            $('.delBtn').on('click',function(){
 	            	$(this).parent().parent().remove();
 	            });
 	            
-	            $('input[name=pickBtn]').on('click', function() {
+	            $('.pickBtn').on('click', function() {
 	            	location.href=order.ct;
 	            });
 	            
@@ -121,22 +121,26 @@
 	            	 chkBookList();
 	            });
 
-	            $('input[name=chk]').on('change',function(){
+	            $('.chk').on('change',function(){
 	            	 chkBookList();
 	            });
 	            
 	            function chkBookList(){
 	            	bookList = [];
-	            	$('input[name=chk]').each(function(index, item){
+	            	
+	            	$('.chk').each(function(index, item){
+	            		
 	            		if( $(this).prop('checked') == true ){
 	            			
 	            			var isbn = $(this).siblings('input').val();
-	            			var bookCnt = $(this).parent().siblings().find('input[type=number]').val();
+	            			var bookCnt = $(this).parent().siblings().find('.quan').val();
 	            			console.log(isbn + " : " + bookCnt);
 	            			
 	            			var book = {"ISBN" : isbn, "count" : bookCnt};
 	            			bookList.push(book);
+	            			
 	            			}
+	            		
 	            	});
 	            	console.log(bookList);
 	            }

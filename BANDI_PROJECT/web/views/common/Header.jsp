@@ -24,12 +24,18 @@
 	
 	<%
 		boolean key = true;
+	
 		//TEMP
 		if(key)
 		{
 			user = new User();
 			user.setmJob("ADM");
 			user.setmGender('M');
+			
+			// [START] USER LOGIN TEST 
+			user.setmNickName("admin");
+			session.setAttribute("user", user);
+			// [END] USER LOGIN TEST
 		}
 	%>
 
