@@ -80,11 +80,11 @@ input[type=number]::-webkit-outer-spin-button {
     border : 0;
 }
 
-#tdChk {
+.tdChk {
 	width : 3%;
 }
 
-#tdBook {
+.tdBook {
 	width : 38%;
 	padding-left : 3%;
 }
@@ -93,15 +93,15 @@ input[type=number]::-webkit-outer-spin-button {
 	width : 13%;
 }
 
-#tdQuan {
+.tdQuan {
 	width : 10%;
 }
 
-#tdBtn {
+.tdBtn {
 	width : 23%;
 }
 
-#quan {
+.quan {
 	width : 70px;
 }
 
@@ -119,4 +119,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 #point {
 	width : 20%;
+}
+
+.bookImg {
+	width : 91px;
+	height : 131px;	
 }

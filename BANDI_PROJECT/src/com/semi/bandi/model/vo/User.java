@@ -21,7 +21,7 @@ public class User implements Serializable
 	
 	private Date mJoinDate; //[11] Join Date [Date]
 	
-	public User(){}
+	public User(){	}
 	
 	public User(int mUser_UID, String mEmail, String mPassword, String mNickName, int mIdentified, int mPhone,
 			String mAddress, char mGender, String mGrade, String mJob) {

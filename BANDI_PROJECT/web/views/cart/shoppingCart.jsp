@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+<%@ page import="com.semi.bandi.model.vo.*, java.util.*, java.text.*" %>
+<%
+	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+	DecimalFormat df = new DecimalFormat("###,###");
+	int bookTotal = 0;
+%>
 <!DOCTYPE html>
 <html>
 
     <head>
-        <meta charset="utf-8?">
+        <meta charset="utf-8">
         <title>장바구니</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,12 +31,12 @@
         <div class="container">
 
             <!-- 장바구니 목록 표시 글 -->
-            <div class="d-flex align-items-center" style="padding-top:5%;">
+            <div class="d-flex align-items-center" style="margin-top:5%;">
                 <i class="fas fa-shopping-basket fa-2x"></i><h3><b>&nbsp;&nbsp;장바구니</b></h3>
             </div>
 
             <!-- 장바구니 목록 테이블 -->
-            <div class="row" style="padding-top:5%;">
+            <div class="row" style="margin-top:5%;">
                 <table class="table table-bordered"> <!-- bootstrap.min.css 에서 table-bordered 안에 text-align:center 추가해줌 -->
                     <thead>
                         <tr>
@@ -43,30 +49,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td id="tdChk"><input type="checkbox" class="chk" id="chk1"><input type="hidden" value="10000123"></td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
-                            <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample2.PNG" alt="퍼즈" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">퍼즈</span></td>
-                            <td class="tdPrice" name="sale" id="sale1">15,500 원</td>
-                            <td id="tdQuan"><input type="number" class="quan" min="0" value="1"></td>
-                            <td class="tdPrice" name="quan" id="quan1">15,500 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
-                        </tr>
-                        <tr>
-                        	<td id="tdChk"><input type="checkbox" class="chk" id="chk2"><input type="hidden" value="20000123"></td>
-                            <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample1.PNG" alt="신경끄기의기술" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">신경끄기의기술</span></td>
-                            <td class="tdPrice" name="sale" id="sale2">21,000 원</td>
-                            <td id="tdQuan"><input type="number" class="quan" min="0" value="1"></td>
-                            <td class="tdPrice" name="quan" id="quan2">21,000 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
-                        </tr>
-                        <tr>
-                        	<td id="tdChk"><input type="checkbox" class="chk" id="chk3"><input type="hidden" value="30000123"></td>
-                            <td class="text-left" id="tdBook"><img name="bookImg" id="bookImg" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample3.PNG" alt="미움받을용기" style="padding-right:5%;"><span id="bookTitle" name="bookTitle">미움받을용기</span></td>
-                            <td class="tdPrice" name="sale" id="sale3">17,000 원</td>
-                            <td id="tdQuan"><input type="number" class="quan" min="0" value="2"></td>
-                            <td class="tdPrice" name="quan" id="quan3">34,000 원</td>
-                            <td id="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
-                        </tr>
+                    	<!-- 조회 한 장바구니 데이터 수만큼 tr태그 생성 -->
+                    	<% if (cartList != null) {
+                    			for (int i = 1; i <= cartList.size(); i++) { 
+                    			bookTotal += cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity(); %>
+	                    	<tr>
+	                            <td class="tdChk"><input type="checkbox" class="chk" id="chk<%= i %>"><input type="hidden" value="<%= cartList.get(i-1).getBookUID() %>"></td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
+	                            <td class="text-left tdBook"><img id="bookImg<%= i %>" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/<%= cartList.get(i-1).getImage() %>" alt="<%= cartList.get(i-1).getTitle() %>" style="margin-right:5%; margin-left:5%;"><%= cartList.get(i-1).getTitle() %></td>
+	                            <td class="tdPrice" id="sale<%= i %>"><%= df.format(cartList.get(i-1).getPrice())%> 원</td>
+	                            <td class="tdQuan"><input type="number" class="quan" id="quan<%= i %>" min="0" value="<%= cartList.get(i-1).getBookQuantity() %>"></td>
+	                            <td class="tdPrice tdTotal" id="quan<%= i %>"><span id="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원</td>
+	                            <td class="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
+	                        </tr>
+                    	<% 	}
+                    		} else {%>
+                    			<tr>
+                    				<td colspan=6><h3>장바구니에 담긴 상품이 없습니다.</h3></td>
+                    			</tr>                    			
+                    	<% } %>
                     </tbody>
                 </table>
             </div>
@@ -78,7 +78,7 @@
             </div>
 
             <!-- 금액 테이블 -->
-            <div class="row" style="padding-top:5%;">
+            <div class="row" style="margin-top:5%;">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -90,17 +90,29 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="total">36,500 원</td>
-                            <td id="delivery">0 원</td>
-                            <td id="orderPrice">36,500 원</td>
-                            <td id="point">2,000 원</td>
+                            <td id="total"><%= df.format(bookTotal) %> 원</td>
+                            <td id="delivery">
+                            	<% if (bookTotal > 30000 || cartList == null) { %>
+                            		0 원
+                            	<% } else {%>
+                            		2,500 원
+                            	<% } %>
+                            </td>
+                            <td id="orderPrice">
+                            	<% if (bookTotal > 30000 || cartList == null) { %>
+                            		<%= df.format(bookTotal) %> 원
+                            	<% } else { %>
+                            		<%= df.format((bookTotal + 2500)) %> 원
+                            	<% } %>                       
+                            </td>
+                            <td id="point"> 원</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- 구매 버튼 -->
-            <div class="row justify-content-end" style="padding-top:5%; padding-bottom:5%;">
+            <div class="row justify-content-end" style="margin-top:5%; margin-bottom:5%;">
                 <input type="button" class="btn3" id="shopBtn" name="shopBtn" value="쇼핑 계속하기">&nbsp;&nbsp;&nbsp;
                 <input type="button" class="btn4" id="orderBtn" name="orderBtn" value="선택상품 주문하기" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;
                 <input type="button" class="btn5" id="allBtn" name="allBtn" value="전체상품 주문하기" onClick="location.href='paymentPage.jsp'">

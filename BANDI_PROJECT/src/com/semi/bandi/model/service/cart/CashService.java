@@ -11,23 +11,33 @@ import static com.semi.bandi.template.JDBCTemplate.*;
 
 public class CashService {
 
-	private Connection con = null;
 	private CashDao cDao = null;
 	
 	public CashService() {
-
-		con = getInstance();
+		
 		cDao = new CashDao();
 		
 	}
 	
 	public ArrayList<Cart> selectBasket(int user_UID) {
+
+		Connection con = getInstance();
 		
-		return null;
+		ArrayList<Cart> result = cDao.selectBasket(con, user_UID);
+		
+		close(con);
+		
+		return result;
 		
 	}
 	
-	public User selectUser(int user_UID) {
+	public User selectUser(int user_UID, String query) {
+		
+		Connection con = getInstance();
+		
+		User user = cDao.selectUser(con, user_UID);
+		
+		close(con);
 		
 		return null;
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.semi.bandi.model.service.cart.CashService;
 import com.semi.bandi.model.vo.User;
 
@@ -46,8 +47,24 @@ public class ShppingCartServlet extends HttpServlet {
 		} else {
 			
 			result = cService.selectBasket(user.getmUser_UID());
+
 			page = "views/cart/shoppingCart.jsp";
-			request.setAttribute("cartList", result);
+			
+			System.out.println("size : " + result.size());
+			
+			if (result.size() != 0) {
+
+				
+				request.setAttribute("cartList", result);
+				System.out.println(result);
+				System.out.println(result.size());
+				
+			} else {
+				
+				request.setAttribute("cartList", null);
+				System.out.println("장바구니 조회 에러");
+				
+			}
 			
 		}
 		

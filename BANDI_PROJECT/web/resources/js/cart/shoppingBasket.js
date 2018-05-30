@@ -1,6 +1,18 @@
 $(function() {
 	
 	var bookList = [];
+	var total = 0;
+	
+	// 처음 접속 시 체크박스 모두 선택
+	$('input:checkbox').each(function() {
+
+		if ($('.chk') > 0) {
+
+			this.checked = true;
+			
+		}
+
+	 });
 	
 	// 테이블 안에 삭제 버튼 기능 구현
 	$('.delBtn').on('click',function(){
@@ -14,20 +26,26 @@ $(function() {
 	
 	// 전체 선택 체크 박스 선택 시
 	$('#chkAll').on('change',function(){
-		chkBookList();
 		
 	    if($('#chkAll').prop("checked")) {
+	    	
 	        $('.chk').not('#chkAll').prop("checked", true);
+	        
 	    } else {
+	    	
 	        $('.chk').prop("checked", false);
+	        
 	    }
+	    	    
+		chkBookList();
+		
 	});
 	
 	// 개별 체크 박스 선택 시
 	$('.chk').on('change',function(){
 
 		if ($('#chkAll').is(":checked") == true) {
-			console.log("chk test");
+			
 			$('#chkAll').prop("checked", false);
 			
 		}
@@ -73,11 +91,11 @@ $(function() {
 			
 			if( $(this).prop('checked') == true ){
 				
-				var isbn = $(this).siblings('input').val();
+				var bookUID = $(this).siblings('input').val();
 				var bookCnt = $(this).parent().siblings().find('.quan').val();
-				console.log(isbn + " : " + bookCnt);
+				console.log(bookUID + " : " + bookCnt);
 				
-				var book = {"ISBN" : isbn, "count" : bookCnt};
+				var book = {"BOOKUID" : bookUID, "COUNT" : bookCnt};
 				bookList.push(book);
 				
 			}

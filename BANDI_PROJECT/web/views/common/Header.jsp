@@ -33,7 +33,7 @@
 			user.setmGender('M');
 			
 			// [START] USER LOGIN TEST 
-			user.setmNickName("admin");
+			user.setmUser_UID(4);
 			session.setAttribute("user", user);
 			// [END] USER LOGIN TEST
 		}

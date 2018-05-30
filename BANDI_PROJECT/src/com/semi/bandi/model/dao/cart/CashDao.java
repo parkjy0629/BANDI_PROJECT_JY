@@ -2,6 +2,9 @@ package com.semi.bandi.model.dao.cart;
 
 import java.io.FileReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -34,11 +37,78 @@ public class CashDao {
 	
 	public ArrayList<Cart> selectBasket(Connection con, int user_UID) {
 		
-		return null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Cart> result = null;
+				
+		try {
+			
+			pstmt = con.prepareStatement(prop.getProperty("selectCart"));
+			
+			pstmt.setInt(1, user_UID);
+			
+			rset = pstmt.executeQuery();
+
+			result = new ArrayList<Cart>();
+			
+			while (rset.next()) {
+				
+				Cart cart = new Cart();
+				
+				cart.setUserUID(rset.getInt("USER_UID"));
+				cart.setBookUID(rset.getInt("BOOK_UID"));
+				cart.setBookQuantity(rset.getInt("CART_QUANTITY"));
+				cart.setImage(rset.getString("IMAGE"));
+				cart.setPrice(rset.getInt("PRICE"));
+				cart.setTitle(rset.getString("TITLE"));
+				
+				result.add(cart);
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+						
+		}
+		
+		return result;
 		
 	}
 	
 	public User selectUser(Connection con, int user_UID) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		User user = null;
+		
+		try {
+			
+			pstmt = con.prepareStatement(prop.getProperty("selectUser"));
+			
+			pstmt.setInt(1, user_UID);
+			
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				
+				user = new User();
+				
+//				user.setmUser_UID();
+//				user.setmPoint();
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		}
 		
 		return null;
 		

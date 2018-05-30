@@ -5,6 +5,9 @@ public class Cart
 	int userUID;
 	int bookUID;
 	int bookQuantity;
+	String image;
+	int price;
+	String title;
 	
 	public Cart(){}
 
@@ -13,6 +16,16 @@ public class Cart
 		this.userUID = userUID;
 		this.bookUID = bookUID;
 		this.bookQuantity = bookQuantity;
+	}
+
+	public Cart(int userUID, int bookUID, int bookQuantity, String image, int price, String title) {
+		super();
+		this.userUID = userUID;
+		this.bookUID = bookUID;
+		this.bookQuantity = bookQuantity;
+		this.image = image;
+		this.price = price;
+		this.title = title;
 	}
 
 	public int getUserUID() {
@@ -37,6 +50,30 @@ public class Cart
 
 	public void setBookQuantity(int bookQuantity) {
 		this.bookQuantity = bookQuantity;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String bookImage) {
+		this.image = bookImage;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override
