@@ -12,7 +12,7 @@
 	response.sendRedirect("GetFromData.do");
 %>
 <head>
-
+    
 </head>
 <body>
 	

@@ -1,6 +1,8 @@
 package com.semi.bandi.controller.cart;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.bandi.model.service.cart.CashService;
+import com.semi.bandi.model.vo.User;
+
+import com.semi.bandi.model.service.cart.CashService;
+import com.semi.bandi.model.vo.Cart;
 import com.semi.bandi.model.vo.User;
 
 // 장바구니
@@ -28,6 +34,8 @@ public class ShppingCartServlet extends HttpServlet {
 		User user = (User)session.getAttribute("user");
 		
 		CashService cService = new CashService();
+
+		ArrayList<Cart> result = null;
 		
 		String page = "";
 		
@@ -37,8 +45,9 @@ public class ShppingCartServlet extends HttpServlet {
 			
 		} else {
 			
-			cService.selectBasket(user.getmUser_UID());
+			result = cService.selectBasket(user.getmUser_UID());
 			page = "views/cart/shoppingCart.jsp";
+			request.setAttribute("cartList", result);
 			
 		}
 		
