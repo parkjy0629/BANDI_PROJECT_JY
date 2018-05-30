@@ -1,6 +1,8 @@
 package com.semi.bandi.controller.cart;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.semi.bandi.model.service.cart.CashService;
+import com.semi.bandi.model.vo.Cart;
 import com.semi.bandi.model.vo.User;
 
-// ì¥ë°”êµ¬ë‹ˆ
+// Àå¹Ù±¸´Ï
 
 @WebServlet("/cart.ct")
 public class ShppingCartServlet extends HttpServlet {
@@ -29,16 +32,19 @@ public class ShppingCartServlet extends HttpServlet {
 		
 		CashService cService = new CashService();
 		
+		ArrayList<Cart> result = null;
+		
 		String page = "";
 		
-		if (user == null) {		// ë¡œê·¸ì¸ ì •ë³´ í™•ì¸ (ë¡œê·¸ì¸ ë˜ì–´ìˆì§€ ì•Šìœ¼ë©´ ì¥ë°”êµ¬ë‹ˆì— ì ‘ê·¼í•  ìˆ˜ ì—†ë‹¤.)
+		if (user == null) {		// ·Î±×ÀÎ Á¤º¸ È®ÀÎ (·Î±×ÀÎ µÇ¾îÀÖÁö ¾ÊÀ¸¸é Àå¹Ù±¸´Ï¿¡ Á¢±ÙÇÒ ¼ö ¾ø´Ù.)
 			
 			page = "/views/main/Main.jsp";
 			
 		} else {
 			
-			cService.selectBasket(user.getmUser_UID());
+			result = cService.selectBasket(user.getmUser_UID());
 			page = "views/cart/shoppingCart.jsp";
+			request.setAttribute("cartList", result);
 			
 		}
 		

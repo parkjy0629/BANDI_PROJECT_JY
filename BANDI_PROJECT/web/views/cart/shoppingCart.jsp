@@ -34,7 +34,7 @@
                 <table class="table table-bordered"> <!-- bootstrap.min.css 에서 table-bordered 안에 text-align:center 추가해줌 -->
                     <thead>
                         <tr>
-                            <th scope="col"><input type="checkbox" name="chkAll" id="chkAll"></th>
+                            <th scope="col"><input type="checkbox" id="chkAll"></th>
                             <th scope="col">상품정보</th>
                             <th scope="col">판매가</th>
                             <th scope="col">수량</th>
@@ -73,8 +73,8 @@
             
             <!-- 삭제 버튼 -->
             <div class="row">
-            	<input type="button" class="btn9" id="selctDelBtn" value="선택 삭제">&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn1" id="AllDelBtn" value="전체 삭제">
+            	<input type="button" class="btn9" id="selectDelBtn" value="선택 삭제">&nbsp;&nbsp;&nbsp;
+                <input type="button" class="btn1" id="allDelBtn" value="전체 삭제">
             </div>
 
             <!-- 금액 테이블 -->
@@ -90,10 +90,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="total" name="total">36,500 원</td>
-                            <td id="delivery" name="delivery">0 원</td>
-                            <td id="orderPrice" name="orderPrice">36,500 원</td>
-                            <td id="point" name="point">2,000 원</td>
+                            <td id="total">36,500 원</td>
+                            <td id="delivery">0 원</td>
+                            <td id="orderPrice">36,500 원</td>
+                            <td id="point">2,000 원</td>
                         </tr>
                     </tbody>
                 </table>
@@ -105,46 +105,6 @@
                 <input type="button" class="btn4" id="orderBtn" name="orderBtn" value="선택상품 주문하기" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;
                 <input type="button" class="btn5" id="allBtn" name="allBtn" value="전체상품 주문하기" onClick="location.href='paymentPage.jsp'">
             </div>
-            
-            <script>
-            	var bookList = [];
-            	
-	            $('.delBtn').on('click',function(){
-	            	$(this).parent().parent().remove();
-	            });
-	            
-	            $('.pickBtn').on('click', function() {
-	            	location.href=order.ct;
-	            });
-	            
-	            $('#chkAll').on('change',function(){
-	            	 chkBookList();
-	            });
-
-	            $('.chk').on('change',function(){
-	            	 chkBookList();
-	            });
-	            
-	            function chkBookList(){
-	            	bookList = [];
-	            	
-	            	$('.chk').each(function(index, item){
-	            		
-	            		if( $(this).prop('checked') == true ){
-	            			
-	            			var isbn = $(this).siblings('input').val();
-	            			var bookCnt = $(this).parent().siblings().find('.quan').val();
-	            			console.log(isbn + " : " + bookCnt);
-	            			
-	            			var book = {"ISBN" : isbn, "count" : bookCnt};
-	            			bookList.push(book);
-	            			
-	            			}
-	            		
-	            	});
-	            	console.log(bookList);
-	            }
-            </script>
             
         </div>
     </body>
