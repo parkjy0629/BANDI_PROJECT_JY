@@ -133,8 +133,8 @@
             <!-- 구매 버튼 -->
             <div class="row justify-content-end" style="margin-top:5%; margin-bottom:5%;">
                 <input type="button" class="btn3" id="shopBtn" name="shopBtn" value="쇼핑 계속하기">&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn4" id="orderBtn" name="orderBtn" value="선택상품 주문하기" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn5" id="allBtn" name="allBtn" value="전체상품 주문하기" onClick="location.href='paymentPage.jsp'">
+                <input type="button" class="btn4" id="orderBtn" name="orderBtn" value="선택상품 주문하기">&nbsp;&nbsp;&nbsp;
+                <input type="button" class="btn5" id="allBtn" name="allBtn" value="전체상품 주문하기">
             </div>
             
         </div>

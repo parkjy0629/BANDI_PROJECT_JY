@@ -1,6 +1,8 @@
 $(function() {
 	
 	var bookList;
+	var bookUID;
+	var cartQUANTITY;
 	
 	// 처음 접속 시 체크박스 모두 선택
 	$('input:checkbox').each(function() {
@@ -21,7 +23,7 @@ $(function() {
 	
 	// 테이블 안에 삭제 버튼 기능 구현
 	$('.delBtn').on('click',function(){
-		delBookList(this);
+		oneDelBook(this);
 	});
 	
 	// '바로구매' 버튼 기능 구현
@@ -31,8 +33,6 @@ $(function() {
 	
 	// 전체 선택 체크 박스 선택 시
 	$('#chkAll').on('change',function(){
-
-		chkBookList();
 		
 	    if($('#chkAll').prop("checked")) {
 	    	
@@ -55,12 +55,17 @@ $(function() {
 			
 		}
 		
-		chkBookList();
+		if ($('.chk').length == $('.chk:checked').length) {
+			
+			$('#chkAll').prop("checked", true);
+			
+		}
 	});
 	
 	// 선택 삭제 버튼 기능 구현
 	$('#selectDelBtn').on('click', function() {
 		chkBookList();	
+		$('#chkAll').prop("checked", false);
 		
 		if (bookList.length > 0) {
 			$('.chk').each(function(index, item) {
@@ -78,11 +83,19 @@ $(function() {
 			
 		}
 		
-		$('#chkAll').prop("checked", false);
+		delBookList();
+		
 	});
 	
 	// 전체 삭제 버튼 기능 구현
 	$('#allDelBtn').on('click', function() {
+		
+		$('.chk').each(function(index, item) {
+			
+			this.checked = true;
+			
+		});
+		
 		chkBookList();
 	
 		$('.chk').each(function(index, item) {
@@ -92,6 +105,8 @@ $(function() {
 		});
 		
 		$('#chkAll').prop("checked", false);
+		
+		delBookList();
 	});
 	
 	// 수량 변경 시 데이터 수정 기능 구현
@@ -115,37 +130,11 @@ $(function() {
 		
 		resetTotal();
 	});
-	
-	// 체크 된 도서 정보 리스트
-	function chkBookList(){
-		bookList = [];
 		
-		$('.chk').each(function(index, item){
-			
-			if( $(this).prop('checked') == true ){
-				
-				var bookUID = $(this).siblings('input').val();
-				var bookCnt = $(this).parent().siblings().find('.quan').val();
-				console.log(bookUID + " : " + bookCnt);
-				
-				var book = {"BOOKUID" : bookUID, "COUNT" : bookCnt};
-				bookList.push(book);
-				
-			}
-			
-		});
-		
-		console.log(bookList);
-	}
-	
 	// 하나의 도서 정보 삭제 구현
-	function delBookList(num) {				
-		bookList = [];
-		
-		var bookUID = $(num).parent().siblings().find('#bookUID').val();
-		
-		var book = {"userUID" : user_uid, "bookUID" : bookUID};
-		bookList.push(book);
+	function oneDelBook(num) {		
+				
+		oneSelBook(num);
 		
 		$.ajax({
 			url : "delete.ct",
@@ -173,7 +162,68 @@ $(function() {
 		console.log(bookList);
 	}
 	
-	function resetTotal() {				// 도서 삭제 시 금액 테이블 reset
+	// '바로구매', '삭제' 버튼 클릭시 해당 도서 정보 담는 기능 구현
+	function oneSelBook(num) {		
+		bookList = [];
+		
+		bookUID = $(num).parent().siblings().find('#bookUID').val();
+		bookQUANTITY = $(num).parent().siblings().find('.quan').val();
+			
+		var book = {"userUID" : user_uid, "bookUID" : bookUID, "bookQUANTITY" : bookQUANTITY};
+		bookList.push(book);
+	}
+	
+	// 1개 이상 도서 정보 삭제 구현
+	function delBookList() {
+		
+		$.ajax({
+			url : "delete.ct",
+			data : {
+				delList : JSON.stringify(bookList)
+			},
+			type : "post",
+			success : function(data) {
+				if (data != 0) {
+
+					resetTotal();
+					
+				} else {
+
+					alert("도서 삭제 오류");
+					
+				}
+			}, error : function(data) {
+				alert("도서 삭제 오류");
+			}
+		});
+		
+		console.log(bookList);
+		
+	}
+	
+	// 1개 이상 체크 된 도서 정보 리스트
+	function chkBookList(){
+		bookList = [];
+		
+		$('.chk').each(function(index, item){
+			
+			if( $(this).prop('checked') == true ){
+				
+				bookUID = $(this).siblings('input').val();
+				bookQUANTITY = $(this).parent().siblings().find('.quan').val();
+				
+				var book = {"userUID" : user_uid, "bookUID" : bookUID, "bookQUANTITY" : bookQUANTITY};
+				bookList.push(book);
+				
+			}
+			
+		});
+		
+		console.log(bookList);
+	}
+	
+	// 도서 삭제 시 금액 테이블 reset
+	function resetTotal() {				
 		
 		var total = 0;
 		
@@ -191,7 +241,6 @@ $(function() {
 			
 		});
 		
-		
 		if (total > 30000 || total == 0) {
 			
 			$('#delivery').text("0 원");
@@ -207,7 +256,7 @@ $(function() {
 			
 		}
 		
-		if ($('.bookPrice').length == 0) {
+		if ($('.bookPrice').length == 0) {			// 읽어올 장바구니 데이터가 없을 경우
 			
 			var $tableBody = $('#bookTb tbody');
 			var $tr = $('<tr>');
