@@ -46,26 +46,48 @@ public class ShppingCartServlet extends HttpServlet {
 			
 		} else {
 			
+			// 로그인 확인 후 로그인 ID의 장바구니 조회
+
+			String query = "SELECT GRADE_CODE ";
+			double point = 0;
+			
 			result = cService.selectBasket(user.getmUser_UID());
+			user = cService.selectUser(user.getmUser_UID(), query);
 
 			page = "views/cart/shoppingCart.jsp";
 			
-			System.out.println("size : " + result.size());
 			
-			if (result.size() != 0) {
+			if (result.size() != 0) {	// 장바구니에 데이터가 있을 경우
 
-				
 				request.setAttribute("cartList", result);
-				System.out.println(result);
-				System.out.println(result.size());
 				
-			} else {
+			} else {	// 장바구니에 데이터가 없을 경우
 				
 				request.setAttribute("cartList", null);
-				System.out.println("장바구니 조회 에러");
 				
 			}
+
+			switch(user.getmGrade()) {
 			
+				case "B" : 
+					point = 0.1;
+					break;
+				case "S" :
+					point = 0.2;
+					break;
+				case "G" :
+					point = 0.3;
+					break;
+				case "P" : 
+					point = 0.4;
+					break;
+				case "D" :
+					point = 0.5;
+					break;
+			
+			}
+			
+			request.setAttribute("point", point);
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// Àå¹Ù±¸´Ï »èÁ¦
+// ì¥ë°”êµ¬ë‹ˆ ë°ì´í„° ì‚­ì œ
 
 @WebServlet("/delete.ct")
 public class CartDeleteServlet extends HttpServlet {

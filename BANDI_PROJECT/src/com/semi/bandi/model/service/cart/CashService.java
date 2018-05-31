@@ -35,11 +35,11 @@ public class CashService {
 		
 		Connection con = getInstance();
 		
-		User user = cDao.selectUser(con, user_UID);
+		User user = cDao.selectUser(con, user_UID, query);
 		
 		close(con);
 		
-		return null;
+		return user;
 	}
 	
 	public int deleteBasket(int user_UID, int book_UID) {

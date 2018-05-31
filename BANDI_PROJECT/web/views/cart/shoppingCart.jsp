@@ -5,6 +5,7 @@
 	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 	DecimalFormat df = new DecimalFormat("###,###");
 	int bookTotal = 0;
+	double point = (Double)request.getAttribute("point");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,12 +55,24 @@
                     			for (int i = 1; i <= cartList.size(); i++) { 
                     			bookTotal += cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity(); %>
 	                    	<tr>
-	                            <td class="tdChk"><input type="checkbox" class="chk" id="chk<%= i %>"><input type="hidden" value="<%= cartList.get(i-1).getBookUID() %>"></td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
-	                            <td class="text-left tdBook"><img id="bookImg<%= i %>" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/<%= cartList.get(i-1).getImage() %>" alt="<%= cartList.get(i-1).getTitle() %>" style="margin-right:5%; margin-left:5%;"><%= cartList.get(i-1).getTitle() %></td>
-	                            <td class="tdPrice" id="sale<%= i %>"><%= df.format(cartList.get(i-1).getPrice())%> 원</td>
-	                            <td class="tdQuan"><input type="number" class="quan" id="quan<%= i %>" min="0" value="<%= cartList.get(i-1).getBookQuantity() %>"></td>
-	                            <td class="tdPrice tdTotal" id="quan<%= i %>"><span id="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원</td>
-	                            <td class="tdBtn"><input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제"></td>
+	                            <td class="tdChk">
+	                            	<input type="checkbox" class="chk" id="chk<%= i %>"><input type="hidden" id="bookUID" value="<%= cartList.get(i-1).getBookUID() %>">
+	                            </td> <!-- bootstrap.min.css 에서 .table td,.table th 안에 vertical-align:middle로 변경 -->
+	                            <td class="text-left tdBook">
+	                            	<img id="bookImg<%= i %>" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/<%= cartList.get(i-1).getImage() %>" alt="<%= cartList.get(i-1).getTitle() %>" style="margin-right:5%; margin-left:5%;"><%= cartList.get(i-1).getTitle() %>
+	                            </td>
+	                            <td class="tdPrice" id="sale<%= i %>">
+	                            	<%= df.format(cartList.get(i-1).getPrice())%> 원
+	                            </td>
+	                            <td class="tdQuan">
+	                            	<input type="number" class="quan" id="quan<%= i %>" min="0" value="<%= cartList.get(i-1).getBookQuantity() %>">
+	                            </td>
+	                            <td class="tdPrice tdTotal" id="quan<%= i %>">
+	                            	<span id="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원
+	                            </td>
+	                            <td class="tdBtn">
+	                            	<input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제">
+	                            </td>
 	                        </tr>
                     	<% 	}
                     		} else {%>
@@ -105,7 +118,13 @@
                             		<%= df.format((bookTotal + 2500)) %> 원
                             	<% } %>                       
                             </td>
-                            <td id="point"> 원</td>
+                            <td id="point">
+                            	<% if (bookTotal > 30000 || cartList == null) { %>
+                            		<%= df.format(bookTotal * point) %>
+                            	<% } else { %>
+                            		<%= df.format((bookTotal + 2500) * point) %>
+                            	<% } %> 
+                           	</td>
                         </tr>
                     </tbody>
                 </table>
@@ -119,6 +138,10 @@
             </div>
             
         </div>
+        
+        <script>
+        	var t ="<%=bookTotal%>";
+        </script>
     </body>
 
 </html>

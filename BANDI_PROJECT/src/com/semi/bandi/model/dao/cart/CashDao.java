@@ -81,7 +81,7 @@ public class CashDao {
 		
 	}
 	
-	public User selectUser(Connection con, int user_UID) {
+	public User selectUser(Connection con, int user_UID, String query) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -89,7 +89,7 @@ public class CashDao {
 		
 		try {
 			
-			pstmt = con.prepareStatement(prop.getProperty("selectUser"));
+			pstmt = con.prepareStatement(query + prop.getProperty("selectUser"));
 			
 			pstmt.setInt(1, user_UID);
 			
@@ -99,8 +99,7 @@ public class CashDao {
 				
 				user = new User();
 				
-//				user.setmUser_UID();
-//				user.setmPoint();
+				user.setmGrade(rset.getString("GRADE_CODE"));
 				
 			}
 			
@@ -110,7 +109,7 @@ public class CashDao {
 			
 		}
 		
-		return null;
+		return user;
 		
 	}
 	
