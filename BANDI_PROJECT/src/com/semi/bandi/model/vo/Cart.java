@@ -11,6 +11,12 @@ public class Cart
 	
 	public Cart(){}
 
+	public Cart(int bookUID, int bookQuantity) {
+		super();
+		this.bookUID = bookUID;
+		this.bookQuantity = bookQuantity;
+	}
+
 	public Cart(int userUID, int bookUID, int bookQuantity) {
 		super();
 		this.userUID = userUID;

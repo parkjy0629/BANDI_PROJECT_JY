@@ -38,7 +38,7 @@
 
             <!-- 장바구니 목록 테이블 -->
             <div class="row" style="margin-top:5%;">
-                <table class="table table-bordered"> <!-- bootstrap.min.css 에서 table-bordered 안에 text-align:center 추가해줌 -->
+                <table class="table table-bordered" id="bookTb"> <!-- bootstrap.min.css 에서 table-bordered 안에 text-align:center 추가해줌 -->
                     <thead>
                         <tr>
                             <th scope="col"><input type="checkbox" id="chkAll"></th>
@@ -62,13 +62,13 @@
 	                            	<img id="bookImg<%= i %>" class="bookImg" src="<%=request.getContextPath()%>/resources/images/cart/BOOK/<%= cartList.get(i-1).getImage() %>" alt="<%= cartList.get(i-1).getTitle() %>" style="margin-right:5%; margin-left:5%;"><%= cartList.get(i-1).getTitle() %>
 	                            </td>
 	                            <td class="tdPrice" id="sale<%= i %>">
-	                            	<%= df.format(cartList.get(i-1).getPrice())%> 원
+	                            	<span class="onePrice"><%= df.format(cartList.get(i-1).getPrice())%></span> 원
 	                            </td>
 	                            <td class="tdQuan">
-	                            	<input type="number" class="quan" id="quan<%= i %>" min="0" value="<%= cartList.get(i-1).getBookQuantity() %>">
+	                            	<input type="number" class="quan" id="quan<%= i %>" min="0" max="100" value="<%= cartList.get(i-1).getBookQuantity() %>">
 	                            </td>
 	                            <td class="tdPrice tdTotal" id="quan<%= i %>">
-	                            	<span id="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원
+	                            	<span class="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원
 	                            </td>
 	                            <td class="tdBtn">
 	                            	<input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제">
@@ -120,9 +120,9 @@
                             </td>
                             <td id="point">
                             	<% if (bookTotal > 30000 || cartList == null) { %>
-                            		<%= df.format(bookTotal * point) %>
+                            		<%= df.format(bookTotal * point) %> P
                             	<% } else { %>
-                            		<%= df.format((bookTotal + 2500) * point) %>
+                            		<%= df.format((bookTotal + 2500) * point) %> P
                             	<% } %> 
                            	</td>
                         </tr>
@@ -140,7 +140,9 @@
         </div>
         
         <script>
-        	var t ="<%=bookTotal%>";
+        	var bookTotal ="<%=bookTotal%>";
+        	var user_uid = "<%= user.getmUser_UID() %>";
+        	var point = "<%=point%>";
         </script>
     </body>
 

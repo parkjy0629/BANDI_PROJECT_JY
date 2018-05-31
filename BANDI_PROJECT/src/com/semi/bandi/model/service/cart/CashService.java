@@ -42,9 +42,25 @@ public class CashService {
 		return user;
 	}
 	
-	public int deleteBasket(int user_UID, int book_UID) {
+	public int deleteBasket(Cart[] cart) {
 		
-		return 0;
+		Connection con = getInstance();
+		
+		int result = cDao.deleteBasket(con, cart);
+		
+		if (result == cart.length) {
+			
+			commit(con);
+			
+		} else {
+			
+			rollback(con);
+			
+		}
+		
+		close(con);
+		
+		return result;
 		
 	}
 	

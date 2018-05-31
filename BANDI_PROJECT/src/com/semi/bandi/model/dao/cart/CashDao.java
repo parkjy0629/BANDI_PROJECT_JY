@@ -113,9 +113,35 @@ public class CashDao {
 		
 	}
 	
-	public int deleteBasket(Connection con, int user_UID, int book_UID) {
+	public int deleteBasket(Connection con, Cart[] cart) {
 		
-		return 0;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		try {
+			
+			pstmt = con.prepareStatement(prop.getProperty("deleteBasket"));
+			
+			for (int i = 0 ; i < cart.length ; i++) {
+
+				pstmt.setInt(1, cart[i].getUserUID());
+				pstmt.setInt(2, cart[i].getBookUID());
+				
+				result += pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
 		
 	}
 	
