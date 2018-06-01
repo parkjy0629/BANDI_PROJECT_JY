@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" %>
 <%@ page import="com.semi.bandi.model.vo.*, java.util.*, java.text.*" %>
 <%
-	
+	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 %>
 <!DOCTYPE html>
 <html>
@@ -50,27 +50,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                    <%
+                    	for(Cart ct : cartList){
+                    		
+                    	}
+                    %>
+                        <%-- <tr>
                             <td class="text-left" style="padding-left:3%;"><img src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample2.PNG" alt="퍼즈" style="padding-right:5%;">퍼즈</td>
                             <td class="text-right" style="padding-right:3%;">15,500 원</td>
                             <td>1</td>
                             <td class="text-right" style="padding-right:3%;">15,500 원</td>
                             <td>사이트 명</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left" style="padding-left:3%;"><img src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample1.PNG" alt="신경끄기의기술" style="padding-right:5%;">신경끄기의기술</td>
-                            <td class="text-right" style="padding-right:3%;">21,000 원</td>
-                            <td>1</td>
-                            <td class="text-right" style="padding-right:3%;">21,000 원</td>
-                            <td>사이트 명</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left" style="padding-left:3%;"><img src="<%=request.getContextPath()%>/resources/images/cart/BOOK/sample3.PNG" alt="미움받을용기" style="padding-right:5%;">미움받을용기</td>
-                            <td class="text-right" style="padding-right:3%;">17,000 원</td>
-                            <td>2</td>
-                            <td class="text-right" style="padding-right:3%;">34,000 원</td>
-                            <td>중고 : 유저 닉네임</td>
-                        </tr>
+                        </tr> --%>
                     </tbody>
                 </table>
             </div>

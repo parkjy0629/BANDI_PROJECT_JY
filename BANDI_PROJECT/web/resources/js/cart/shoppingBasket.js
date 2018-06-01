@@ -28,7 +28,14 @@ $(function() {
 	
 	// '바로구매' 버튼 기능 구현
 	$('.pickBtn').on('click', function() {
-		oneBuyBook(this);
+		bookUID = $(this).parent().siblings().find('#bookUID').val();
+		
+		oneSelBook(this);
+		
+		console.log(bookList);
+		console.log("bookUID : " + bookUID);
+		
+		location.href="/BANDI/order.ct?bookUID=" + bookUID;
 	});
 	
 	// 전체 선택 체크 박스 선택 시
@@ -162,34 +169,7 @@ $(function() {
 		console.log(bookList);
 	}
 	
-	function oneBuyBook(num) {
-		
-		oneSelBook(num);
-		
-		$.ajax({
-			url : "order.ct",
-			data : {
-				bookList : JSON.stringify(bookList)
-			},
-			type : "post",
-			success : function(data) {
-				if (data == 0) {
-
-					alert("도서 주문 오류");
-					
-				} else {
-					location.href = "서블릿";
-				}
-			}, error : function(data) {
-				alert("도서 주문 오류");
-			}
-		});
-		
-		location.href="/BANDI/order.ct";
-		
-	}
-	
-	// '바로구매', '삭제' 버튼 클릭시 해당 도서 정보 담는 기능 구현
+	// '삭제' 버튼 클릭시 해당 도서 정보 담는 기능 구현
 	function oneSelBook(num) {		
 		bookList = [];
 		
@@ -241,7 +221,7 @@ $(function() {
 				
 				var book = {"userUID" : user_uid, "bookUID" : bookUID, "bookQUANTITY" : bookQUANTITY};
 				bookList.push(book);
-				
+								
 			}
 			
 		});
@@ -272,14 +252,14 @@ $(function() {
 			
 			$('#delivery').text("0 원");
 			$('#orderPrice').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ " 원");
-			$('#point').text((total * point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "P");
+			$('#point').text((total * point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " P");
 			
 		} else {
 			
 			$('#delivery').text("2,500 원");
 			total += 2500;
 			$('#orderPrice').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ " 원");
-			$('#point').text((total * point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "P");
+			$('#point').text((total * point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " P");
 			
 		}
 		

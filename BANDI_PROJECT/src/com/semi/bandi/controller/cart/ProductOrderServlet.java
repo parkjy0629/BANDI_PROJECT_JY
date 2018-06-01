@@ -1,14 +1,19 @@
 package com.semi.bandi.controller.cart;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.semi.bandi.model.service.cart.CashService;
 import com.semi.bandi.model.vo.Cart;
+import com.semi.bandi.model.vo.User;
 
 // 주문 / 결제
 
@@ -21,24 +26,23 @@ public class ProductOrderServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String bookList = request.getParameter("bookList");
 		
-		System.out.println(bookList);
+		String bookData = request.getParameter("bookUID");
 		
-		Gson gson  = new Gson();
+		HttpSession session = request.getSession(false);
 		
-		Cart[] cartList = gson.fromJson(bookList, Cart[].class);
+		User user = (User)session.getAttribute("user");
 		
-		response.setContentType("text/html; charset=UTF-8");
+		System.out.println("UID : " + user.getmUser_UID());
 		
-		if(cartList.length > 0){			// 도서 주문
-
-			System.out.println("Test");
-			request.getRequestDispatcher("views/cart/productOrder.jsp").forward(request, response);
+		String[] bookList = bookData.split(",");
 		
-		} else {			// 잘못 된 경로로 접근할 경우 (주문할 도서 정보가 없을 경우)
+		System.out.println(bookData);
+		System.out.println(bookList.length);
+		
+		for (int i = 0 ; i < bookList.length ; i++) {
 			
-			response.getWriter().print(0);
+			System.out.println(bookList[i]);
 			
 		}
 		

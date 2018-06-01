@@ -145,6 +145,32 @@ public class CashDao {
 		
 	}
 	
+	public ArrayList<Cart> seletCart(Connection con, String bookList, int useruid) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Cart>result = null;
+		
+		try {
+			
+			pstmt = con.prepareStatement(prop.getProperty("selectCart" + " AND BOOK_UID = ?"));
+		
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
 	public int insertOrder(Connection con, ArrayList<Cart> cart) {
 		
 		return 0;
