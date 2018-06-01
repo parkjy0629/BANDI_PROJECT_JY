@@ -71,7 +71,7 @@
 	                            	<span class="bookPrice"><%= df.format(cartList.get(i-1).getPrice() * cartList.get(i-1).getBookQuantity()) %></span> 원
 	                            </td>
 	                            <td class="tdBtn">
-	                            	<input type="button" class="btn1 pickBtn" value="바로구매" onClick="location.href='paymentPage.jsp'">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제">
+	                            	<input type="button" class="btn1 pickBtn" value="바로구매">&nbsp;&nbsp;&nbsp;<input type="button" class="btn2 delBtn" value="삭제">
 	                            </td>
 	                        </tr>
                     	<% 	}

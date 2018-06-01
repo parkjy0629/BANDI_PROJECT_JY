@@ -36,9 +36,7 @@ public class CartDeleteServlet extends HttpServlet {
 		//ArrayList<Cart> cart = gson.fromJson(delList, ArrayList.class);
 		 
 		Cart[] cartList = gson.fromJson(delList, Cart[].class);
-		// 이렇게 객체배열로 받아 오시면 됩니다.
-		// 우울해하지 말고, 힘내세요 ^_^ !!
-				
+		
 		response.setContentType("text/html; charset=UTF-8");
 		
 		if(cartList.length > 0){			// 도서 정보 삭제

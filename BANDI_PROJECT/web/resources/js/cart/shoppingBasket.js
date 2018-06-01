@@ -28,7 +28,7 @@ $(function() {
 	
 	// '바로구매' 버튼 기능 구현
 	$('.pickBtn').on('click', function() {
-		location.href="/BANDI/order.ct";
+		oneBuyBook(this);
 	});
 	
 	// 전체 선택 체크 박스 선택 시
@@ -160,6 +160,33 @@ $(function() {
 		});
 		
 		console.log(bookList);
+	}
+	
+	function oneBuyBook(num) {
+		
+		oneSelBook(num);
+		
+		$.ajax({
+			url : "order.ct",
+			data : {
+				bookList : JSON.stringify(bookList)
+			},
+			type : "post",
+			success : function(data) {
+				if (data == 0) {
+
+					alert("도서 주문 오류");
+					
+				} else {
+					location.href = "서블릿";
+				}
+			}, error : function(data) {
+				alert("도서 주문 오류");
+			}
+		});
+		
+		location.href="/BANDI/order.ct";
+		
 	}
 	
 	// '바로구매', '삭제' 버튼 클릭시 해당 도서 정보 담는 기능 구현
