@@ -37,14 +37,39 @@ public class ProductOrderServlet extends HttpServlet {
 		
 		String[] bookList = bookData.split(",");
 		
-		System.out.println(bookData);
-		System.out.println(bookList.length);
+		// bookList 확인 부분 [START]
+		System.out.println("bookData 확인 : " + bookData);
+		System.out.println("bookList length : " + bookList.length);
 		
 		for (int i = 0 ; i < bookList.length ; i++) {
 			
-			System.out.println(bookList[i]);
+			System.out.println("bookList 확인 : " + bookList[i]);
 			
 		}
+		// bookList 확인 부분 [END]
+		
+		CashService cService = new CashService();
+		
+		ArrayList<Cart> result = cService.selectCart(bookList, user.getmUser_UID());
+		
+		System.out.println("서블릿 데이터 : " + result);
+		
+		String page = "";
+		
+		if (result != null) {	// 주문 정보 조회 성공
+			
+			page = "views/cart/productOrder.jsp";
+			
+			request.setAttribute("cartList", result);
+			
+			
+		} else {		// 주문 정보 조회 실패
+			
+			page = "views/cart/shoppingCart.jsp";
+			
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

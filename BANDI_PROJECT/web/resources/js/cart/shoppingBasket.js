@@ -2,6 +2,7 @@ $(function() {
 	
 	var bookList;
 	var bookUID;
+	var bookUIDList;
 	var cartQUANTITY;
 	
 	// 처음 접속 시 체크박스 모두 선택
@@ -29,13 +30,41 @@ $(function() {
 	// '바로구매' 버튼 기능 구현
 	$('.pickBtn').on('click', function() {
 		bookUID = $(this).parent().siblings().find('#bookUID').val();
-		
-		oneSelBook(this);
-		
-		console.log(bookList);
+//		
+//		oneSelBook(this);
+//		
+//		console.log(bookList);
 		console.log("bookUID : " + bookUID);
 		
 		location.href="/BANDI/order.ct?bookUID=" + bookUID;
+	});
+	
+	// '선택상품 주문하기' 버튼 기능 구현
+	$('#orderBtn').on('click', function() {
+		bookUIDList = "";
+		
+		chkBookList();
+		
+		if (bookList.length != 0) {
+
+			$('.chk').each(function(index, item) {
+				if ($(this).prop("checked") == true) {
+					
+					bookUIDList += $(this).siblings('input').val() + ",";
+					console.log("bookUID : " + $(this).siblings('input').val() + "/" + index);
+					
+				}
+			});
+			
+		} else {
+			
+			alert("주문할 도서를 선택해주세요.");
+			
+		}
+		console.log("bookUID : " + bookUIDList);
+		
+		location.href="/BANDI/order.ct?bookUID=" + bookUIDList;
+		
 	});
 	
 	// 전체 선택 체크 박스 선택 시
@@ -50,6 +79,8 @@ $(function() {
 	        $('.chk').prop("checked", false);
 	        
 	    }
+	    
+	    resetTotal();
 		
 	});
 	
@@ -67,6 +98,8 @@ $(function() {
 			$('#chkAll').prop("checked", true);
 			
 		}
+		
+		resetTotal();
 	});
 	
 	// 선택 삭제 버튼 기능 구현
@@ -234,11 +267,21 @@ $(function() {
 		
 		var total = 0;
 		
-		$('.bookPrice').each(function(index, item){
+		$('.chk').each(function(index, item) {
 			
-			total += parseInt($(this).text().replace(",", ""));
+			if ($(this).prop('checked') == true) {
+				
+				total += parseInt($(this).parent().siblings().find('.bookPrice').text().replace(",", ""));
+				console.log("total1 : " + total);
+			} else {
+				
+				console.log("test");
+				
+			}
 			
 		});
+		
+		console.log("total : " + total);
 		
 		$('#total').text(total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+ " 원");
 		

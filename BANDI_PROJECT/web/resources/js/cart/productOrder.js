@@ -1,4 +1,14 @@
-$(function() {$('#addrSearch').bind('click', function() {
+$(function() {
+
+	// 장바구니로 돌아가는 기능
+	$('#returnBtn').on('click', function() {
+		
+		location.href="/BANDI/cart.ct";
+		
+	});
+	
+	// 주소 찾기 기능
+	$('#addrSearch').bind('click', function() {
 		var width = 500;
 	    var height = 500;
 	
@@ -6,11 +16,7 @@ $(function() {$('#addrSearch').bind('click', function() {
 	
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-	
-	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-	
+	           	
 	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
 	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 	            var fullAddr = ''; // 최종 주소 변수
@@ -50,19 +56,11 @@ $(function() {$('#addrSearch').bind('click', function() {
 	            // 커서를 상세주소 필드로 이동한다.
 	            $('#addr2').focus();
 	        }
-	        // onclose: function(state) {
-	        //     //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
-	        //     if(state === 'FORCE_CLOSE'){
-	        //         //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
-	
-	        //     } else if(state === 'COMPLETE_CLOSE'){
-	        //         //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
-	        //         //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
-	        //     }
-	        // }
+	       
 	    }).open({
 	        left: (window.screen.width / 2) - (width / 2),
 	        top: (window.screen.height / 2) - (height / 2)
 	    });
-	})
+	});
+		
 });

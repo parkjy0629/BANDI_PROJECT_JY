@@ -145,15 +145,58 @@ public class CashDao {
 		
 	}
 	
-	public ArrayList<Cart> seletCart(Connection con, String bookList, int useruid) {
+	public ArrayList<Cart> seletCart(Connection con, String[] bookList, int useruid) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Cart>result = null;
 		
-		try {
+		String query = " AND (";
+		
+		for (int i = 0 ; i < bookList.length ; i++) {
 			
-			pstmt = con.prepareStatement(prop.getProperty("selectCart" + " AND BOOK_UID = ?"));
+			if (i != bookList.length - 1) {
+				
+				query += "B.BOOK_UID = ? OR ";
+				
+			} else {
+				
+				query += "B.BOOK_UID = ?";
+				
+			}
+			
+		} query += ")";
+				
+		try {
+
+			pstmt = con.prepareStatement(prop.getProperty("selectCart") + query);
+			
+			pstmt.setInt(1, useruid);
+			
+			for (int i = 1 ; i <= bookList.length ; i++) {
+				
+				pstmt.setInt((i + 1), Integer.parseInt(bookList[i-1]));
+				
+			}
+			
+			rset = pstmt.executeQuery();
+			
+			result = new ArrayList<Cart>();
+			
+			while (rset.next()) {
+				
+				Cart cart = new Cart();
+				
+				cart.setUserUID(rset.getInt("USER_UID"));
+				cart.setBookUID(rset.getInt("BOOK_UID"));
+				cart.setBookQuantity(rset.getInt("CART_QUANTITY"));
+				cart.setImage(rset.getString("IMAGE"));
+				cart.setPrice(rset.getInt("PRICE"));
+				cart.setTitle(rset.getString("TITLE"));
+				
+				result.add(cart);
+				
+			}
 		
 			
 		} catch (SQLException e) {
@@ -166,7 +209,7 @@ public class CashDao {
 			close(pstmt);
 			
 		}
-		
+		System.out.println("주문 도서 정보 : " + result);
 		return result;
 		
 	}

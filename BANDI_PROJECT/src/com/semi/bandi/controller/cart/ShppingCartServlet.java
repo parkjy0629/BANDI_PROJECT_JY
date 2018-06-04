@@ -39,7 +39,7 @@ public class ShppingCartServlet extends HttpServlet {
 		ArrayList<Cart> result = null;
 		
 		String page = "";
-		
+
 		if (user == null) {		// 로그인 정보 확인 (로그인 되어있지 않으면 장바구니에 접근할 수 없다.)
 			
 			page = "/views/main/Main.jsp";
